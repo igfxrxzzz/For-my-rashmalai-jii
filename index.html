@@ -3,73 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Birthday Surprise for Rasmalai 🎈</title>
+    <title>Birthday Surprise 🎈</title>
     <style>
         body {
-            margin: 0; padding: 0; background: #fff9c4;
+            margin: 0; padding: 0; background: #fff5f7;
             font-family: 'Arial Rounded MT Bold', sans-serif;
-            overflow: hidden; text-align: center;
+            overflow: hidden; text-align: center; touch-action: manipulation;
         }
         #game-container { position: relative; width: 100vw; height: 100vh; }
-        h1 { color: #d35400; margin-top: 20px; z-index: 10; position: relative; }
         
-        /* Balloon Style */
-        .balloon {
-            position: absolute; bottom: -100px; width: 70px; height: 90px;
-            background-color: #ff4081; border-radius: 50%; cursor: pointer;
-            animation: floatUp 4s linear forwards;
-        }
-        @keyframes floatUp { to { transform: translateY(-110vh); } }
+        h1 { color: #d35400; font-size: 1.5rem; margin-top: 20px; padding: 0 10px; z-index: 10; position: relative; }
 
-        /* Lifafa (Envelope) Styles */
+        /* Balloons */
+        .balloon {
+            position: absolute; bottom: -100px; width: 60px; height: 80px;
+            border-radius: 50%; cursor: pointer; animation: floatUp 4s linear forwards;
+            box-shadow: inset -5px -5px rgba(0,0,0,0.1);
+        }
+        @keyframes floatUp { to { transform: translateY(-115vh); } }
+
+        /* Lifafa (Envelope) - Adjusted for Mobile */
         #envelope-wrapper {
-            display: none; position: absolute; top: 50%; left: 50%;
+            display: none; position: absolute; top: 60%; left: 50%;
             transform: translate(-50%, -50%); z-index: 100;
         }
         .envelope {
-            position: relative; width: 300px; height: 200px;
-            background: #d35400; border-radius: 0 0 10px 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            position: relative; width: 260px; height: 160px;
+            background: #ff7675; border-radius: 0 0 10px 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
         }
         .envelope::before {
-            content: ""; position: absolute; top: -100px; left: 0;
-            border-left: 150px solid transparent; border-right: 150px solid transparent;
-            border-bottom: 100px solid #e67e22; z-index: 2;
+            content: ""; position: absolute; top: -80px; left: 0;
+            border-left: 130px solid transparent; border-right: 130px solid transparent;
+            border-bottom: 80px solid #fab1a0; z-index: 2;
         }
+
+        /* Letter Styling */
         .letter {
-            position: absolute; bottom: 10px; left: 10px; right: 10px;
-            background: white; padding: 20px; border-radius: 5px;
-            transition: transform 1s ease-in-out; z-index: 1;
-            font-size: 0.95rem; line-height: 1.4; color: #333;
-            box-shadow: 0 -5px 10px rgba(0,0,0,0.1);
+            position: absolute; bottom: 5px; left: 10px; right: 10px;
+            background: white; padding: 15px; border-radius: 5px;
+            transition: transform 1.5s ease-in-out; z-index: 1;
+            font-size: 0.85rem; line-height: 1.4; color: #2d3436;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            text-align: left;
         }
-        /* Animation to pull letter out */
-        .open-letter { transform: translateY(-180px); z-index: 3 !important; }
+        .open-letter { transform: translateY(-220px); z-index: 3 !important; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+
+        /* Floating Hearts Animation */
+        .heart {
+            position: absolute; color: #ff7675; font-size: 20px;
+            animation: heartFloat 3s linear infinite; opacity: 0;
+        }
+        @keyframes heartFloat {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-100px) scale(1.5); opacity: 0; }
+        }
 
         .btn-start {
-            padding: 15px 30px; font-size: 1.2rem; background: #d35400;
-            color: white; border: none; border-radius: 50px; cursor: pointer;
-            margin-top: 200px;
+            padding: 12px 25px; font-size: 1.1rem; background: #ff7675;
+            color: white; border: none; border-radius: 25px; cursor: pointer;
+            margin-top: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
     </style>
 </head>
 <body>
 
     <div id="game-container">
-        <h1 id="title">Pop 10 Balloons to Open Your Surprise! 🎈</h1>
-        <button class="btn-start" id="start-btn" onclick="startGame()">Start Game</button>
+        <h1 id="title">Pop 10 Balloons for your surprise, Rasmalai! 🎈</h1>
+        <button class="btn-start" id="start-btn" onclick="startGame()">Tap to Start</button>
         
-        <div id="score" style="display:none; font-size: 1.5rem; color: #d35400; margin-top:10px;">
+        <div id="score" style="display:none; font-size: 1.2rem; color: #d63031; margin-top:5px;">
             Popped: <span id="count">0</span>/10
         </div>
 
         <div id="envelope-wrapper">
             <div class="envelope">
                 <div class="letter" id="letter">
-                    <strong>Happy Birthday to the sweetest Rasmalai in the world! 🎈</strong><br><br>
-                    Aaj tumhara din hai, toh khub enjoy karna aur hamesha aise hi chamakti rehna. 
-                    Main bas yehi wish karta hoon ki tumhari life ki mithas hamesha bani rahe aur tum hamesha khush raho.<br><br>
-                    Tum jaisi bhi ho, bilkul perfect ho. Have a blockbuster birthday and stay as amazing as you are! ❤️✨
+                    <b style="color:#d63031;">Happy Birthday, Rasmalai! 🎈</b><br><br>
+                    Aaj tumhara din hai, khoob enjoy karna aur hamesha aise hi chamakti rehna. <br><br>
+                    Life ki mithas bani rahe aur tum hamesha khush raho. Tum jaisi ho, perfect ho. <br><br>
+                    <b>Stay Amazing! ❤️✨</b>
                 </div>
             </div>
         </div>
@@ -83,16 +96,16 @@
             document.getElementById('start-btn').style.display = 'none';
             document.getElementById('score').style.display = 'block';
             gameActive = true;
-            setInterval(createBalloon, 600);
+            const gameInterval = setInterval(createBalloon, 600);
         }
 
         function createBalloon() {
             if (!gameActive) return;
             const b = document.createElement('div');
             b.className = 'balloon';
-            const colors = ['#FF5733', '#33FF57', '#3357FF', '#F333FF', '#FF33A8'];
+            const colors = ['#ff7675', '#74b9ff', '#55efc4', '#fab1a0', '#a29bfe'];
             b.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-            b.style.left = Math.random() * (window.innerWidth - 70) + 'px';
+            b.style.left = Math.random() * (window.innerWidth - 60) + 'px';
             
             b.onclick = function() {
                 this.remove();
@@ -110,15 +123,23 @@
             document.getElementById('score').style.display = 'none';
             document.querySelectorAll('.balloon').forEach(el => el.remove());
             
-            const wrapper = document.getElementById('envelope-wrapper');
-            wrapper.style.display = 'block';
+            document.getElementById('envelope-wrapper').style.display = 'block';
             
-            // Wait a second then slide the letter up
             setTimeout(() => {
                 document.getElementById('letter').classList.add('open-letter');
-            }, 1000);
+                setInterval(createHeart, 400); // Start heart animation
+            }, 800);
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.top = '40%';
+            document.body.appendChild(heart);
+            setTimeout(() => { heart.remove(); }, 3000);
         }
     </script>
 </body>
-    </html>
-    
+</html>
