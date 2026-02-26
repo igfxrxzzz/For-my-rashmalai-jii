@@ -3,127 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Rasmalai! 🎂</title>
+    <title>Birthday Surprise for Rasmalai 🎈</title>
     <style>
         body {
-            margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #fceabb, #f8b500);
-            text-align: center;
-            overflow-x: hidden;
+            margin: 0; padding: 0; background: #fff9c4;
+            font-family: 'Arial Rounded MT Bold', sans-serif;
+            overflow: hidden; text-align: center;
         }
-        .container { padding: 20px; }
-        h1 { color: #d35400; font-size: 3rem; margin-top: 50px; text-shadow: 2px 2px #fff; }
-        .nickname { color: #e67e22; font-weight: bold; font-style: italic; }
+        #game-container { position: relative; width: 100vw; height: 100vh; }
+        h1 { color: #d35400; margin-top: 20px; z-index: 10; position: relative; }
         
-        /* Game Styles */
-        #game-area {
-            width: 100%;
-            height: 400px;
-            background: rgba(255, 255, 255, 0.3);
-            border: 2px dashed #d35400;
-            position: relative;
-            margin: 20px auto;
-            max-width: 600px;
-            border-radius: 15px;
-            overflow: hidden;
-            display: none;
+        /* Balloon Style */
+        .balloon {
+            position: absolute; bottom: -100px; width: 70px; height: 90px;
+            background-color: #ff4081; border-radius: 50%; cursor: pointer;
+            animation: floatUp 4s linear forwards;
         }
-        .rasmalai-icon {
-            width: 60px;
-            cursor: pointer;
-            position: absolute;
-            transition: 0.2s;
-        }
-        #score { font-size: 1.2rem; font-weight: bold; color: #d35400; }
+        @keyframes floatUp { to { transform: translateY(-110vh); } }
 
-        /* Button Styles */
-        .btn {
-            background: #d35400;
-            color: white;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 25px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            margin: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        /* Lifafa (Envelope) Styles */
+        #envelope-wrapper {
+            display: none; position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%); z-index: 100;
         }
-        .btn:hover { background: #e67e22; }
+        .envelope {
+            position: relative; width: 300px; height: 200px;
+            background: #d35400; border-radius: 0 0 10px 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .envelope::before {
+            content: ""; position: absolute; top: -100px; left: 0;
+            border-left: 150px solid transparent; border-right: 150px solid transparent;
+            border-bottom: 100px solid #e67e22; z-index: 2;
+        }
+        .letter {
+            position: absolute; bottom: 10px; left: 10px; right: 10px;
+            background: white; padding: 20px; border-radius: 5px;
+            transition: transform 1s ease-in-out; z-index: 1;
+            font-size: 0.95rem; line-height: 1.4; color: #333;
+            box-shadow: 0 -5px 10px rgba(0,0,0,0.1);
+        }
+        /* Animation to pull letter out */
+        .open-letter { transform: translateY(-180px); z-index: 3 !important; }
 
-        /* Hidden Gift Section */
-        #gift-section { display: none; margin-top: 30px; animation: fadeIn 2s; }
-        @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
-        
-        ul { list-style: none; padding: 0; display: inline-block; text-align: left; }
-        li { font-size: 1.2rem; margin: 10px 0; color: #2c3e50; font-weight: 500; }
+        .btn-start {
+            padding: 15px 30px; font-size: 1.2rem; background: #d35400;
+            color: white; border: none; border-radius: 50px; cursor: pointer;
+            margin-top: 200px;
+        }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>Happy Birthday, <span class="nickname">Rasmalai</span>! 🍮</h1>
-        <p style="font-size: 1.2rem;">Today is all about you! But first, you have to win your treat. 😉</p>
+    <div id="game-container">
+        <h1 id="title">Pop 10 Balloons to Open Your Surprise! 🎈</h1>
+        <button class="btn-start" id="start-btn" onclick="startGame()">Start Game</button>
         
-        <button class="btn" id="start-btn" onclick="startGame()">Play "Catch the Rasmalai"</button>
-
-        <div id="game-area">
-            <p id="score">Score: 0 / 5</p>
-            <div id="target" class="rasmalai-icon" onclick="catchRasmalai()">🍮</div>
+        <div id="score" style="display:none; font-size: 1.5rem; color: #d35400; margin-top:10px;">
+            Popped: <span id="count">0</span>/10
         </div>
 
-        <div id="gift-section">
-            <h2>Yay! You won! 🎉</h2>
-            <p>Since you caught the Rasmalai, here are the 5 things I like most about you:</p>
-            <ul>
-                <li>1. Eating u (The sweetest treat! 😉)</li>
-                <li>2. Talking with u (Never gets old)</li>
-                <li>3. Your vibe (Whatever it is, it's working)</li>
-                <li>4. Challenging me (Like you always do)</li>
-                <li>5. <strong>YOU.</strong> (Simply because you're you)</li>
-            </ul>
-            <br>
-            <p style="font-weight: bold; color: #d35400; font-size: 1.5rem;">Have the best day ever! ❤️</p>
+        <div id="envelope-wrapper">
+            <div class="envelope">
+                <div class="letter" id="letter">
+                    <strong>Happy Birthday to the sweetest Rasmalai in the world! 🎈</strong><br><br>
+                    Aaj tumhara din hai, toh khub enjoy karna aur hamesha aise hi chamakti rehna. 
+                    Main bas yehi wish karta hoon ki tumhari life ki mithas hamesha bani rahe aur tum hamesha khush raho.<br><br>
+                    Tum jaisi bhi ho, bilkul perfect ho. Have a blockbuster birthday and stay as amazing as you are! ❤️✨
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
-        let score = 0;
-        const target = document.getElementById('target');
-        const gameArea = document.getElementById('game-area');
-        const giftSection = document.getElementById('gift-section');
-        const scoreDisplay = document.getElementById('score');
+        let popped = 0;
+        let gameActive = false;
 
         function startGame() {
             document.getElementById('start-btn').style.display = 'none';
-            gameArea.style.display = 'block';
-            moveTarget();
+            document.getElementById('score').style.display = 'block';
+            gameActive = true;
+            setInterval(createBalloon, 600);
         }
 
-        function moveTarget() {
-            const x = Math.random() * (gameArea.clientWidth - 60);
-            const y = Math.random() * (gameArea.clientHeight - 60);
-            target.style.left = x + 'px';
-            target.style.top = y + 'px';
+        function createBalloon() {
+            if (!gameActive) return;
+            const b = document.createElement('div');
+            b.className = 'balloon';
+            const colors = ['#FF5733', '#33FF57', '#3357FF', '#F333FF', '#FF33A8'];
+            b.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            b.style.left = Math.random() * (window.innerWidth - 70) + 'px';
+            
+            b.onclick = function() {
+                this.remove();
+                popped++;
+                document.getElementById('count').innerText = popped;
+                if (popped === 10) showEnvelope();
+            };
+            document.getElementById('game-container').appendChild(b);
+            setTimeout(() => { b.remove(); }, 4000);
         }
 
-        function catchRasmalai() {
-            score++;
-            scoreDisplay.innerText = "Score: " + score + " / 5";
-            if (score >= 5) {
-                gameArea.style.display = 'none';
-                giftSection.style.display = 'block';
-                launchConfetti();
-            } else {
-                moveTarget();
-            }
-        }
-
-        // Optional: Simple Confetti effect alert
-        function launchConfetti() {
-            alert("Happy Birthday, Rasmalai! 🥳");
+        function showEnvelope() {
+            gameActive = false;
+            document.getElementById('title').style.display = 'none';
+            document.getElementById('score').style.display = 'none';
+            document.querySelectorAll('.balloon').forEach(el => el.remove());
+            
+            const wrapper = document.getElementById('envelope-wrapper');
+            wrapper.style.display = 'block';
+            
+            // Wait a second then slide the letter up
+            setTimeout(() => {
+                document.getElementById('letter').classList.add('open-letter');
+            }, 1000);
         }
     </script>
 </body>
-  </html>
-  
+    </html>
+    
